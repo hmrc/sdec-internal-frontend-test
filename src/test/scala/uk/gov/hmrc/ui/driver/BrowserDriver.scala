@@ -1,34 +1,22 @@
 package uk.gov.hmrc.ui.driver
 
-import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
-import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.verbs.ShouldVerb
-import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
-import uk.gov.hmrc.ui.specs.BaseSpec
-//import uk.gov.hmrc.ui.pages.{#PAGE OBJECT NAMES HERE# e.g. ExampleRadioPage}
-//import uk.gov.hmrc.ui.util.Users.LoginTypes.HASDIRECT
-//import uk.gov.hmrc.ui.util.Users.UserTypes.Organisation
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.chrome.{ChromeDriver, ChromeOptions}
 
-class BrowserDriver
-    extends AnyFeatureSpec
-    with BaseSpec
-    with GivenWhenThen
-    with ShouldVerb
-    with BeforeAndAfterAll
-    with BeforeAndAfterEach
-    with Browser
-    with ScreenshotOnFailure {
+trait BrowserDriver {
 
-  Feature("Charities - Agent - Gift Aid frontend Journeys") {
-    Scenario("Agent navigates to **service name**") {
-      Given("Agent navigates to **page name** page")
-      // CODE LINE - e.g. ExampleRadioPage.verifyPageTitle(ExampleRadioPage.pageTitle)
-      And("Agent clicks 'Yes' radio button option")
-      // CODE LINE - e.g. ExampleRadioPage.clickYesRadio()
-      And("Agent clicks 'Continue' button")
-      // CODE LINE - e.g. ExampleRadioPage.clickSubmitButton()
-      And("User navigates to **next page** page")
-      // CODE LINE - e.g. AnotherPage.verifyPageTitle(AnotherPage.pageTitle)
-    }
+  lazy val baseUrl: String =
+    sys.env.getOrElse("BASE_URL", "http://localhost:4000")
+
+  lazy val driver: WebDriver = {
+    val options = new ChromeOptions()
+    options.addArguments("--headless=new")
+    options.addArguments("--no-sandbox")
+    options.addArguments("--disable-dev-shm-usage")
+    options.addArguments("--window-size=1920,1080")
+    new ChromeDriver(options)
   }
+
+  def quitDriver(): Unit =
+    if (driver != null) driver.quit()
 }

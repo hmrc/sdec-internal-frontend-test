@@ -16,6 +16,10 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.selenium.component.PageObject
+import org.openqa.selenium.WebDriver
 
-trait BasePage extends PageObject {}
+abstract class BasePage(val driver: WebDriver) {
+
+  def currentUrl: String =
+    driver.getCurrentUrl
+}

@@ -1,4 +1,4 @@
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.sdec.specs
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import org.scalatest.featurespec.AnyFeatureSpec

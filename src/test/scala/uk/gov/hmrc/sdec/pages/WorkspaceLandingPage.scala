@@ -1,4 +1,4 @@
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.sdec.pages
 
 import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}

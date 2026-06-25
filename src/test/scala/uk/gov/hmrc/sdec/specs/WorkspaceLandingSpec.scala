@@ -1,10 +1,10 @@
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.sdec.specs
 
-import uk.gov.hmrc.ui.driver.BrowserDriver
+import uk.gov.hmrc.sdec.driver.BrowserDriver
 import org.scalatest.GivenWhenThen
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
-import uk.gov.hmrc.ui.pages.WorkspaceLandingPage
+import uk.gov.hmrc.sdec.pages.WorkspaceLandingPage
 
 class WorkspaceLandingSpec extends AnyFeatureSpec with GivenWhenThen with BrowserDriver with Matchers with BaseSpec {
 

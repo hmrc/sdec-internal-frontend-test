@@ -1,4 +1,4 @@
-package uk.gov.hmrc.ui.driver
+package uk.gov.hmrc.sdec.driver
 
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.{ChromeDriver, ChromeOptions}

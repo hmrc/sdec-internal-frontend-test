@@ -1,10 +1,11 @@
-**This is the template README. Please update this with project specific content.**
-
 # sdec-internal-frontend-test
 
-<SERVICE_NAME> UI journey tests.
+SDEC Internal Frontend UI journey tests.
 
 ## Pre-requisites
+If running locally, you will need:
+1. Authentication services
+2. An instance of sdec-internal-frontend
 
 ### Services
 
@@ -14,21 +15,19 @@ Start Mongo Docker container as follows:
 docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:6.0
 ```
 
-Start `<SERVICE_MANAGER_PROFILE>` services as follows:
+Start the following services:
+ - AUTH
+ - AUTH_LogIN_API
+ - AUTH_LOGIN_sTUB
 
 ```bash
-sm2 --start <SERVICE_MANAGER_PROFILE>
+sm2 --start SDEC_INTERNAL_FRONTEND
 ```
 
 ## Tests
 
-Run tests as follows:
-
-* Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
-* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
-
 ```bash
-sbt clean -Dbrowser="<browser>" -Denvironment="<environment>" test testReport
+sbt clean -Dbrowser="<browser>" -Denvironment="local" test testReport
 ```
 
 ## Scalafmt

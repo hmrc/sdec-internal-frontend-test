@@ -7,7 +7,6 @@ import uk.gov.hmrc.ui.specs.tags.AcceptanceTests
 
 import java.time.Duration
 
-
 class WorkspaceSpec extends BaseSpec {
   Feature("Internal User Journey") {
 

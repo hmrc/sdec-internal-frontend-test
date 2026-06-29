@@ -27,7 +27,6 @@ trait BasePage extends Matchers with PageObject {
   val submitButtonId: By = By.id("submit-top")
 
   def continue(locator: By = submitButtonId): Unit = {
-    println(s"Pressing submit button: $locator")
     assertLocatorPresent(locator)
     click(locator)
   }

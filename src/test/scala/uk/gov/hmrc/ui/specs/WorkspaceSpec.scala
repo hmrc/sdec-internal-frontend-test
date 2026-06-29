@@ -1,0 +1,28 @@
+package uk.gov.hmrc.ui.specs
+
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.AuthLoginPage.{driver, login}
+import uk.gov.hmrc.ui.specs.tags.AcceptanceTests
+
+class WorkspaceSpec extends BaseSpec {
+  Feature("Internal User Journey") {
+
+    Scenario("Get Landing Page", AcceptanceTests) {
+
+      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
+      login()
+      When("the dashboard page loads")
+      Then("the system must display a dashboard page layout")
+      val heading = driver.findElement(By.tagName("h1"))
+
+      And("the system must display a navigation area")
+
+      val workspaceTab    = driver.findElement(By.id("tab_workspace"))
+      val notificationTab = driver.findElement(By.id("tab_notifications"))
+
+      heading.getText         shouldBe "SDEC Internal Dashboard"
+      workspaceTab.getText    shouldBe "Workspace"
+      notificationTab.getText shouldBe "Notifications"
+    }
+  }
+}

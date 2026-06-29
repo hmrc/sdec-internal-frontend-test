@@ -4,7 +4,6 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.AuthLoginPage.{driver, login}
 import uk.gov.hmrc.ui.specs.tags.AcceptanceTests
 
-
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
@@ -12,13 +11,8 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.ui.pages.WorkspaceLandingPage
 
-  Feature("Internal User Journey") {
-    Scenario("Get Landing Page", AcceptanceTests) {
-      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
-      login()
-
 class WorkspaceSpec
-  extends AnyFeatureSpec
+    extends AnyFeatureSpec
     with BaseSpec
     with GivenWhenThen
     with ShouldVerb
@@ -38,7 +32,7 @@ class WorkspaceSpec
       WorkspaceLandingPage.isPageDisplayed shouldBe true
 
       And("the system must display a navigation area")
-      WorkspaceLandingPage.isWorkspaceTabDisplayed shouldBe true
+      WorkspaceLandingPage.isWorkspaceTabDisplayed     shouldBe true
       WorkspaceLandingPage.isNotificationsTabDisplayed shouldBe true
     }
 
@@ -48,7 +42,7 @@ class WorkspaceSpec
 
       When("the user views the navigation area")
       Then("the following tabs must be displayed")
-      WorkspaceLandingPage.isWorkspaceTabDisplayed shouldBe true
+      WorkspaceLandingPage.isWorkspaceTabDisplayed     shouldBe true
       WorkspaceLandingPage.isNotificationsTabDisplayed shouldBe true
 
       And("the Workspace tab must be selected by default")
@@ -78,7 +72,6 @@ class WorkspaceSpec
       And("the internal user's name must be dynamically populated")
       WorkspaceLandingPage.welcomeMessageText should include("Dyfrig Rees")
     }
-
 
   }
 }

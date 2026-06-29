@@ -22,7 +22,7 @@ import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, Driver, ScreenshotOnFailure}
 
 trait BaseSpec
-  extends AnyFeatureSpec
+    extends AnyFeatureSpec
     with GivenWhenThen
     with Matchers
     with BeforeAndAfterEach
@@ -33,11 +33,9 @@ trait BaseSpec
   override def beforeAll(): Unit = {
     startBrowser()
     Driver.instance.manage().deleteAllCookies()
-   
+
   }
 
-  override def afterAll(): Unit = {
+  override def afterAll(): Unit =
     quitBrowser()
-  }
 }
-

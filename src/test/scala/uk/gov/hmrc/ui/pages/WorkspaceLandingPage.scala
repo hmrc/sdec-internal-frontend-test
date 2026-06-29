@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-
 import org.openqa.selenium.{By, WebElement}
 
 import uk.gov.hmrc.ui.driver.BrowserDriver
@@ -25,7 +24,6 @@ import scala.jdk.CollectionConverters.*
 
 object WorkspaceLandingPage extends BasePage with BrowserDriver {
   val baseUrl: String = "http://localhost:4002"
-  
 
   private val welcomeMessageLocator: By =
     By.xpath("//li[contains(@class,'govuk-service-navigation__item') and contains(normalize-space(),'Welcome back')]")
@@ -44,10 +42,9 @@ object WorkspaceLandingPage extends BasePage with BrowserDriver {
 
   private val headingLocator: By =
     By.cssSelector("h1.govuk-heading-l")
-    
-  def navigateWSPage(): Unit = {
+
+  def navigateWSPage(): Unit =
     driver.navigate().to(s"$baseUrl/workspace")
-  }
   // =========================
   // Element getters
   // =========================

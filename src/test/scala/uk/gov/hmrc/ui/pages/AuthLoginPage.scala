@@ -1,7 +1,6 @@
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{By, JavascriptExecutor}
-import uk.gov.hmrc.selenium.webdriver.Driver
+import org.openqa.selenium.By
 import uk.gov.hmrc.ui.conf.TestConfiguration
 import uk.gov.hmrc.ui.driver.BrowserDriver
 

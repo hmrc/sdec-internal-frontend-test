@@ -3,11 +3,16 @@ package uk.gov.hmrc.sdec.specs
 import uk.gov.hmrc.sdec.driver.BrowserDriver
 import org.scalatest.GivenWhenThen
 import org.scalatest.featurespec.AnyFeatureSpec
+import play.api.inject.guice.GuiceApplicationBuilder
 import org.scalatest.matchers.should.Matchers
+import play.api.Application
 import uk.gov.hmrc.sdec.pages.WorkspaceLandingPage
 
 class WorkspaceLandingSpec extends AnyFeatureSpec with GivenWhenThen with BrowserDriver with Matchers with BaseSpec {
-
+  lazy val app: Application =
+    GuiceApplicationBuilder()
+      .configure("play.http.router" -> "test.Routes")
+      .build()
   Feature("Workspace landing page") {
 
     info("As an internal user")

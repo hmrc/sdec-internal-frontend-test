@@ -1,22 +1,16 @@
 package uk.gov.hmrc.sdec.driver
 
+import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.{ChromeDriver, ChromeOptions}
+import uk.gov.hmrc.selenium.webdriver.Driver
 
-trait BrowserDriver {
-
-  lazy val baseUrl: String =
-    sys.env.getOrElse("BASE_URL", "http://localhost:4000")
-
-  lazy val driver: WebDriver = {
-    val options = new ChromeOptions()
-    options.addArguments("--headless=new")
-    options.addArguments("--no-sandbox")
-    options.addArguments("--disable-dev-shm-usage")
-    options.addArguments("--window-size=1920,1080")
-    new ChromeDriver(options)
+trait BrowserDriver extends LazyLogging {
+  def driver: WebDriver = {
+    if Option(Driver.instance).isEmpty then {
+      val msg = "WebDriver (Driver.instance) is null! Make sure startBrowser() was called before using driver."
+      logger.error(msg)
+      throw new IllegalStateException(msg)
+    }
+    Driver.instance
   }
-
-  def quitDriver(): Unit =
-    if (driver != null) driver.quit()
 }

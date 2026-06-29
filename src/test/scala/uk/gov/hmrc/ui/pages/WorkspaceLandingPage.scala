@@ -23,7 +23,7 @@ import uk.gov.hmrc.ui.driver.BrowserDriver
 import scala.jdk.CollectionConverters.*
 
 object WorkspaceLandingPage extends BasePage with BrowserDriver {
-  val baseUrl: String = "http://localhost:4002"
+  val baseUrl: String = "http://localhost:4000"
 
   private val welcomeMessageLocator: By =
     By.xpath("//li[contains(@class,'govuk-service-navigation__item') and contains(normalize-space(),'Welcome back')]")

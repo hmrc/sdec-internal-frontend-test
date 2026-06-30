@@ -66,7 +66,6 @@ class WorkspaceSpec extends BaseSpec {
         fail("Create thread button was not displayed")
       }
 
-
       And("the button must be selectable")
       buttonEnabled shouldBe true
 

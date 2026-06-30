@@ -24,9 +24,6 @@ class WorkspaceSpec extends BaseSpec {
 
       And("the system must display a navigation area")
 
-      println(s"URL: ${driver.getCurrentUrl}")
-      println(s"Title: ${driver.getTitle}")
-
       val wait = new WebDriverWait(driver, Duration.ofSeconds(15))
 
       val workspaceTab = wait.until(

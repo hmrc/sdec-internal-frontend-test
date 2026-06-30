@@ -1,7 +1,5 @@
 package uk.gov.hmrc.ui.pages
 
-
-
 import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
 
@@ -36,7 +34,7 @@ class WorkspacePage(driver: WebDriver) extends BasePage {
   def isCreateThreadButtonDisplayed: Boolean =
     driver.findElements(createThreadButtonLocator).asScala.nonEmpty &&
       getCreateThreadButton.isDisplayed
-      
+
   def isCreateThreadButtonEnabled: Boolean =
     getCreateThreadButton.isEnabled
 

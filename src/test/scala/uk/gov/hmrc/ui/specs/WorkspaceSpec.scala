@@ -39,7 +39,7 @@ class WorkspaceSpec extends BaseSpec {
       workspaceTab.getText    shouldBe "Workspace"
       notificationTab.getText shouldBe "Notifications"
     }
-    Scenario("AC5 - Display Create Thread Button") {
+    Scenario(" Display Create Thread Button") {
       Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
       login()
 

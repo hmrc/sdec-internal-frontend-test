@@ -2,12 +2,15 @@ package uk.gov.hmrc.ui.specs
 
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
+import org.scalatest.featurespec.AnyFeatureSpec
+import org.scalatest.matchers.must.Matchers
 import uk.gov.hmrc.ui.pages.AuthLoginPage.{driver, login}
+import uk.gov.hmrc.ui.pages.WorkspacePage
 import uk.gov.hmrc.ui.specs.tags.AcceptanceTests
 
 import java.time.Duration
 
-class WorkspaceSpec extends BaseSpec {
+class WorkspaceSpec  extends  BaseSpec {
   Feature("Internal User Journey") {
 
     Scenario("Get Landing Page", AcceptanceTests) {
@@ -36,5 +39,29 @@ class WorkspaceSpec extends BaseSpec {
       workspaceTab.getText    shouldBe "Workspace"
       notificationTab.getText shouldBe "Notifications"
     }
+    Scenario("AC5 - Display Create Thread Button") {
+      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
+      login()
+
+      When("the user views the page")
+      val wPage = new WorkspacePage(driver)
+      val buttonDisplayed = wPage.isCreateThreadButtonDisplayed
+      val buttonEnabled = wPage.isCreateThreadButtonEnabled
+      val buttonText = wPage.getThreadButtonText
+      
+      Then("""a "Create thread" button must be displayed""")
+      
+     buttonDisplayed shouldBe true
+      
+      And("the button must be selectable")
+      buttonEnabled shouldBe true
+
+      And("the button must follow GOV.UK Design System standards")
+      buttonText shouldBe "Create thread"
+    } 
+    
+    
+    
+    
   }
 }

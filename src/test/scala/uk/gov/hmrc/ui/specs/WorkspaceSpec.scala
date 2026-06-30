@@ -52,7 +52,7 @@ class WorkspaceSpec extends BaseSpec {
       buttonEnabled shouldBe true
 
       And("the button must follow GOV.UK Design System standards")
-      buttonText shouldBe "Create thread"
+      buttonText shouldBe "Create Thread"
 
     }
 

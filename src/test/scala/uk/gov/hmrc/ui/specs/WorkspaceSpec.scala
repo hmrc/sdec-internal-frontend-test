@@ -36,7 +36,6 @@ class WorkspaceSpec extends BaseSpec {
       workspaceTab.getText    shouldBe "Workspace"
       notificationTab.getText shouldBe "Notifications"
 
-
     }
 
     Scenario("Create Thread Button", AcceptanceTests) {

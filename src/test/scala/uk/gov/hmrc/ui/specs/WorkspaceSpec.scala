@@ -38,16 +38,12 @@ class WorkspaceSpec extends BaseSpec {
       heading.getText         shouldBe "SDEC Internal Dashboard"
       workspaceTab.getText    shouldBe "Workspace"
       notificationTab.getText shouldBe "Notifications"
-    }
-    Scenario(" Display Create Thread Button") {
-      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
-      login()
 
-      When("the user views the page")
-      val wPage           = new WorkspacePage(driver)
+
+      val wPage = new WorkspacePage(driver)
       val buttonDisplayed = wPage.isCreateThreadButtonDisplayed
-      val buttonEnabled   = wPage.isCreateThreadButtonEnabled
-      val buttonText      = wPage.getThreadButtonText
+      val buttonEnabled = wPage.isCreateThreadButtonEnabled
+      val buttonText = wPage.getThreadButtonText
 
       Then("""a "Create thread" button must be displayed""")
 
@@ -58,7 +54,9 @@ class WorkspaceSpec extends BaseSpec {
 
       And("the button must follow GOV.UK Design System standards")
       buttonText shouldBe "Create thread"
+
     }
+
 
   }
 }

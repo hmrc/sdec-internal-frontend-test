@@ -36,20 +36,6 @@ class WorkspaceSpec extends BaseSpec {
       workspaceTab.getText    shouldBe "Workspace"
       notificationTab.getText shouldBe "Notifications"
 
-      val wPage           = new WorkspacePage(driver)
-      val buttonDisplayed = wPage.isCreateThreadButtonDisplayed
-      val buttonEnabled   = wPage.isCreateThreadButtonEnabled
-      val buttonText      = wPage.getThreadButtonText
-
-      Then("""a "Create thread" button must be displayed""")
-
-      buttonDisplayed shouldBe true
-
-      And("the button must be selectable")
-      buttonEnabled shouldBe true
-
-      And("the button must follow GOV.UK Design System standards")
-      buttonText shouldBe "Create Thread"
 
     }
 

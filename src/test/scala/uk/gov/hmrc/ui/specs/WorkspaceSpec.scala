@@ -66,7 +66,7 @@ class WorkspaceSpec extends BaseSpec {
         ExpectedConditions.visibilityOfElementLocated(By.id("tab_workspace"))
       )
 
-      workspaceTab.getText    shouldBe "Workspace"
+      workspaceTab.getText shouldBe "Workspace"
 
       val wPage           = new WorkspacePage(driver)
       val buttonDisplayed = wPage.isCreateThreadButtonDisplayed

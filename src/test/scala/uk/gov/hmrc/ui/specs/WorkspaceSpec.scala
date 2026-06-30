@@ -60,7 +60,12 @@ class WorkspaceSpec extends BaseSpec {
 
       Then("""a "Create thread" button must be displayed""")
 
-      buttonDisplayed shouldBe true
+      if (buttonDisplayed) {
+        buttonDisplayed shouldBe true
+      } else {
+        fail("Create thread button was not displayed")
+      }
+
 
       And("the button must be selectable")
       buttonEnabled shouldBe true

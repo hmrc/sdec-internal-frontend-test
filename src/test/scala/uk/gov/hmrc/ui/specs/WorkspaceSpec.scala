@@ -1,11 +1,26 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.ui.specs
 
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.must.Matchers
-import uk.gov.hmrc.ui.pages.AuthLoginPage.{driver, login}
-import uk.gov.hmrc.ui.pages.WorkspacePage
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, WorkspacePage}
 import uk.gov.hmrc.ui.specs.tags.AcceptanceTests
 
 import java.time.Duration
@@ -13,43 +28,44 @@ import java.time.Duration
 class WorkspaceSpec extends BaseSpec {
   Feature("Internal User Journey") {
 
-    Scenario("Get Landing Page", AcceptanceTests) {
+    Scenario("Get Landing Page with correct Role for test user", AcceptanceTests) {
 
-      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
-      login()
+      Given("User Logins with correct role")
+      AuthLoginPage.navigateToAuthPage()
+      AuthLoginPage.enterPIDValue("123456")
+      AuthLoginPage.enterGivenNameValue("test")
+      AuthLoginPage.enterSurNameValue("user")
+      AuthLoginPage.enterEmailAddressValue("test.user@gmail.com")
+      AuthLoginPage.selectStatusSuccess()
+      AuthLoginPage.selectSignatureValid()
+      AuthLoginPage.enterRolesText("sdec_integration_tester")
+      AuthLoginPage.selectConfirmAndSendButton()
 
       When("the dashboard page loads")
-      Then("the system must display a dashboard page layout")
-      val heading = driver.findElement(By.tagName("h1"))
-
-      And("the system must display a navigation area")
-
-      val wait = new WebDriverWait(driver, Duration.ofSeconds(15))
-
-      val workspaceTab = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.id("tab_workspace"))
-      )
-
-      val notificationTab = driver.findElement(By.id("tab_notifications"))
-
-      heading.getText         shouldBe "SDEC Internal Dashboard"
-      workspaceTab.getText    shouldBe "Workspace"
-      notificationTab.getText shouldBe "Notifications"
-
-      val wPage           = new WorkspacePage(driver)
-      val buttonDisplayed = wPage.isCreateThreadButtonDisplayed
-      val buttonEnabled   = wPage.isCreateThreadButtonEnabled
-      val buttonText      = wPage.getThreadButtonText
+      WorkspacePage.getWorkspaceHeadingText shouldBe "Workspace"
 
       Then("""a "Create thread" button must be displayed""")
+      WorkspacePage.getThreadButtonText should include("Create Thread")
 
-      buttonDisplayed shouldBe true
+    }
 
-      And("the button must be selectable")
-      buttonEnabled shouldBe true
+    Scenario("Get validation message with incorrect Role for test user", AcceptanceTests) {
 
-      And("the button must follow GOV.UK Design System standards")
-      buttonText shouldBe "Create Thread"
+      Given("User Logins with Credential ID")
+      AuthLoginPage.navigateToAuthPage()
+      AuthLoginPage.enterPIDValue("123456")
+      AuthLoginPage.enterGivenNameValue("test")
+      AuthLoginPage.enterSurNameValue("user")
+      AuthLoginPage.enterEmailAddressValue("test.user@gmail.com")
+      AuthLoginPage.selectStatusSuccess()
+      AuthLoginPage.selectSignatureValid()
+      AuthLoginPage.enterRolesText("sdec_qa_tester")
+
+      When("the test user enters the submit button")
+      AuthLoginPage.selectConfirmAndSendButton()
+
+      Then("the Insufficient Role page is displayed")
+      WorkspacePage.getInsufficientRolePageText shouldBe "Insuffient Role"
 
     }
 

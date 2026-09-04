@@ -28,9 +28,9 @@ import java.time.Duration
 class WorkspaceSpec extends BaseSpec {
   Feature("Internal User Journey") {
 
-    Scenario("Get Landing Page", AcceptanceTests) {
+    Scenario("Get Landing Page with correct Role for test user", AcceptanceTests) {
 
-      Given("User Logins with Credential ID") // This might be the wrong way for internal HMRC staff to login for now
+      Given("User Logins with correct role")
       AuthLoginPage.navigateToAuthPage()
       AuthLoginPage.enterPIDValue("123456")
       AuthLoginPage.enterGivenNameValue("test")
@@ -46,6 +46,26 @@ class WorkspaceSpec extends BaseSpec {
 
       Then("""a "Create thread" button must be displayed""")
       WorkspacePage.getThreadButtonText should include("Create Thread")
+
+    }
+
+    Scenario("Get validation message with incorrect Role for test user", AcceptanceTests) {
+
+      Given("User Logins with Credential ID")
+      AuthLoginPage.navigateToAuthPage()
+      AuthLoginPage.enterPIDValue("123456")
+      AuthLoginPage.enterGivenNameValue("test")
+      AuthLoginPage.enterSurNameValue("user")
+      AuthLoginPage.enterEmailAddressValue("test.user@gmail.com")
+      AuthLoginPage.selectStatusSuccess()
+      AuthLoginPage.selectSignatureValid()
+      AuthLoginPage.enterRolesText("sdec_qa_tester")
+
+      When("the test user enters the submit button")
+      AuthLoginPage.selectConfirmAndSendButton()
+
+      Then("the Insufficient Role page is displayed")
+      WorkspacePage.getInsufficientRolePageText shouldBe "Insuffient Role"
 
     }
 

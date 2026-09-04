@@ -27,11 +27,15 @@ object WorkspacePage extends BrowserDriver with BasePage {
   val workspacePageHeading: By      = By.xpath("//*[@id=\"workspace\"]/h2")
   val workspaceLinkClick: By        = By.xpath("//*[@id=\"tab_workspace\"]")
   val createThreadButtonLocator: By = By.cssSelector("#workspace > div > div > button")
+  val insufficientRolePage: By      = By.xpath("//*[@id=\"main-content\"]/div/div/h1")
 
   private val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
 
   def getWorkspaceHeadingText: String =
     wait.until(ExpectedConditions.visibilityOfElementLocated(workspacePageHeading)).getText.trim
+
+  def getInsufficientRolePageText: String =
+    wait.until(ExpectedConditions.visibilityOfElementLocated(insufficientRolePage)).getText.trim
 
   def getWorkspaceLinkClick: WebElement =
     wait.until(ExpectedConditions.visibilityOfElementLocated(workspaceLinkClick))

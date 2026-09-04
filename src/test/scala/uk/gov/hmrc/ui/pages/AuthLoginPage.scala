@@ -51,7 +51,14 @@ object AuthLoginPage extends BrowserDriver with BasePage {
     wait.until(ExpectedConditions.visibilityOfElementLocated(emailAddress))
 
   def navigateToAuthPage(): Unit =
-    navigateTo(url)
+    try {
+      driver.manage().deleteAllCookies()
+      navigateTo(url)
+    } catch {
+      case e: Exception =>
+        println(s"Error clearing cache: ${e.getMessage}")
+        navigateTo(url)
+    }
 
   def enterPIDValue(value: String): Unit = {
     val input = getEnterPidNameInput

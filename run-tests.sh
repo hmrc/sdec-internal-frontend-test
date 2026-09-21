@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 
-DEFAULT_BROWSER=chrome
-BROWSER_TYPE=$1
-ENV=$2
+BROWSER=$1
+ENVIRONMENT=$2
+HEADLESSFLAG=$3
+PREVIOUSVERSIONFLAG=$4
 
-if [ -z "$BROWSER_TYPE" ]; then
-    echo "BROWSER_TYPE value not set, defaulting to $DEFAULT_BROWSER..."
-    echo ""
-fi
-
-# Scalafmt checks have been separated from the test command to avoid OutOfMemoryError in Jenkins
-sbt scalafmtCheckAll scalafmtSbtCheck
-
-sbt clean -Dbrowser="chrome" -Denvironment="local" -Dbrowser.option.headless=false -Dbrowser.usePreviousVersion=false "testOnly uk.gov.hmrc.ui.specs.* -- -n AcceptanceTests" testReport
+sbt scalafmtAll scalafmtCheckAll scalafmtSbtCheck clean -Dbrowser="${BROWSER:=chrome}" -Denvironment="${ENVIRONMENT:=local}" -Dbrowser.option.headless="${HEADLESSFLAG:=false}" -Dbrowser.usePreviousVersion="${PREVIOUSVERSIONFLAG:=true}" "testOnly uk.gov.hmrc.ui.specs.* -- -n AcceptanceTests" testReport
